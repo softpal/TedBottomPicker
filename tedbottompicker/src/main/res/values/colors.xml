@@ -4,4 +4,9 @@
     <color name="tedbottompicker_gallery">#ccc</color>
     <color name="tedbottompicker_selected">#f0f0f0</color>
 
+    <color name="primaryTextColor">#ffffff</color>
+    <color name="secondaryTextColor">#000000</color>
+    <color name="background">#eeeeee</color>
+
+
 </resources>

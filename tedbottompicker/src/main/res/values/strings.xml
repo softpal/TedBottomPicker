@@ -4,6 +4,9 @@
     <string name="no_image">No Image</string>
     <string name="done">Done</string>
 
+    <string name="select_another_image" translatable="false">Select another image</string>
+    <string name="no_image_selected" translatable="false">No image selected</string>
+
 
     <string name="select_max_count">Already %1$d images selected</string>
     <string name="select_min_count">You have to choice %1$d images</string>
