@@ -433,21 +433,35 @@ public class TedBottomSheetDialogFragment extends BottomSheetDialogFragment
 					if(builder.showPreviewInGallery)
 					{
 						Uri selectedImageUri = getURIFromIntent(data);
-						Intent intent = new Intent(mActivity,ImagePreviewActivity.class);
-						ArrayList<com.himangi.imagepreview.PreviewFile> previewFile = new ArrayList<com.himangi.imagepreview.PreviewFile>();
-						String galleryImagePreviewText = "";
-						if(! StringUtils.isEmpty(builder.galleryImagePreviewText))
+						if(selectedImageUri != null)
 						{
-							galleryImagePreviewText = builder.galleryImagePreviewText;
+							Intent intent = new Intent(mActivity,ImagePreviewActivity.class);
+							ArrayList<com.himangi.imagepreview.PreviewFile> previewFile = new ArrayList<com.himangi.imagepreview.PreviewFile>();
+							String galleryImagePreviewText = "";
+							if(! StringUtils.isEmpty(builder.galleryImagePreviewText))
+							{
+								galleryImagePreviewText = builder.galleryImagePreviewText;
+							}
+							previewFile.add(new com.himangi.imagepreview.PreviewFile(selectedImageUri.toString(),galleryImagePreviewText));
+							intent.putExtra(PREVIEW_LIST,previewFile);
+							startActivityForResult(intent,TED_GALLERY_IMAGE_PREVIEW);
 						}
-						previewFile.add(new com.himangi.imagepreview.PreviewFile(selectedImageUri.toString(),galleryImagePreviewText));
-						intent.putExtra(PREVIEW_LIST,previewFile);
-						startActivityForResult(intent,TED_GALLERY_IMAGE_PREVIEW);
+						else
+						{
+							return;
+						}
 					}
 					else
 					{
 						Uri selectedImageUri = getURIFromIntent(data);
-						complete(selectedImageUri);
+						if(selectedImageUri != null)
+						{
+							complete(selectedImageUri);
+						}
+						else
+						{
+							return;
+						}
 					}
 				}
 			}
@@ -718,20 +732,25 @@ public class TedBottomSheetDialogFragment extends BottomSheetDialogFragment
 		if(temp == null)
 		{
 			errorMessage();
+			
+			return null;
 		}
-		
-		String realPath = RealPathUtil.getRealPath(getActivity(),temp);
-		
-		Uri selectedImageUri;
-		try
+		else
 		{
-			selectedImageUri = Uri.fromFile(new File(realPath));
+			
+			String realPath = RealPathUtil.getRealPath(getActivity(),temp);
+			
+			Uri selectedImageUri;
+			try
+			{
+				selectedImageUri = Uri.fromFile(new File(realPath));
+			}
+			catch(Exception ex)
+			{
+				selectedImageUri = Uri.parse(realPath);
+			}
+			return selectedImageUri;
 		}
-		catch(Exception ex)
-		{
-			selectedImageUri = Uri.parse(realPath);
-		}
-		return selectedImageUri;
 	}
 	
 	@Override
