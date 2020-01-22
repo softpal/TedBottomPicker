@@ -50,8 +50,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.gun0912.tedonactivityresult.TedOnActivityResult;
 import com.gun0912.tedonactivityresult.listener.OnActivityResultListener;
-import com.himangi.imagepreview.ImagePreviewActivity;
-import com.himangi.imagepreview.PreviewFile;
+import com.softpal.imagepreview.ImagePreviewActivity;
+import com.softpal.imagepreview.PreviewFile;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -436,13 +436,13 @@ public class TedBottomSheetDialogFragment extends BottomSheetDialogFragment
 						if(selectedImageUri != null)
 						{
 							Intent intent = new Intent(mActivity,ImagePreviewActivity.class);
-							ArrayList<com.himangi.imagepreview.PreviewFile> previewFile = new ArrayList<com.himangi.imagepreview.PreviewFile>();
+							ArrayList<PreviewFile> previewFile = new ArrayList<PreviewFile>();
 							String galleryImagePreviewText = "";
 							if(! StringUtils.isEmpty(builder.galleryImagePreviewText))
 							{
 								galleryImagePreviewText = builder.galleryImagePreviewText;
 							}
-							previewFile.add(new com.himangi.imagepreview.PreviewFile(selectedImageUri.toString(),galleryImagePreviewText));
+							previewFile.add(new PreviewFile(selectedImageUri.toString(),galleryImagePreviewText));
 							intent.putExtra(PREVIEW_LIST,previewFile);
 							startActivityForResult(intent,TED_GALLERY_IMAGE_PREVIEW);
 						}
