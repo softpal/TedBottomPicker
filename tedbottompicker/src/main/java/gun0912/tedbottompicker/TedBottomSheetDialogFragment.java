@@ -36,6 +36,7 @@ import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -250,7 +251,6 @@ public class TedBottomSheetDialogFragment extends BottomSheetDialogFragment
 	
 	private void updateAdapter()
 	{
-		
 		imageGalleryAdapter = new GalleryAdapter(getActivity(),builder);
 		rc_gallery.setAdapter(imageGalleryAdapter);
 		imageGalleryAdapter.setOnItemClickListener(new GalleryAdapter.OnItemClickListener()
@@ -428,7 +428,7 @@ public class TedBottomSheetDialogFragment extends BottomSheetDialogFragment
 			@Override
 			public void onActivityResult(int resultCode,Intent data)
 			{
-				if(resultCode == Activity.RESULT_OK)
+				if(resultCode == RESULT_OK)
 				{
 					if(builder.showPreviewInGallery)
 					{
@@ -444,6 +444,7 @@ public class TedBottomSheetDialogFragment extends BottomSheetDialogFragment
 							}
 							previewFile.add(new PreviewFile(selectedImageUri.toString(),galleryImagePreviewText));
 							intent.putExtra(PREVIEW_LIST,previewFile);
+							intent.putExtra(ImagePreviewActivity.IS_ACCEPT_CANCEL_AVAILABLE,true);
 							startActivityForResult(intent,TED_GALLERY_IMAGE_PREVIEW);
 						}
 						else
